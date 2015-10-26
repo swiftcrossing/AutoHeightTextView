@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,28 +17,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit Lorem ipsum dolor sit er elit" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zLk-hF-gUo">
-                                <rect key="frame" x="0.0" y="20" width="600" height="33"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgj-ce-L4b">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="85K-dq-V9Q">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="SkY-y1-weP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="w3o-kL-tfP"/>
+                                        </connections>
+                                    </textView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dcb-rv-QZm">
+                                        <rect key="frame" x="8" y="41" width="584" height="200"/>
+                                        <color key="backgroundColor" red="0.90196079015731812" green="0.77587244989935633" blue="0.8519511898429879" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="584" id="RZa-e2-N5M"/>
+                                            <constraint firstAttribute="height" constant="200" id="gJD-BO-NYL"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="P9A-yh-yQh"/>
+                                    <constraint firstItem="dcb-rv-QZm" firstAttribute="trailing" secondItem="wgj-ce-L4b" secondAttribute="trailingMargin" id="2tp-Rl-9XB"/>
+                                    <constraint firstItem="85K-dq-V9Q" firstAttribute="top" secondItem="wgj-ce-L4b" secondAttribute="top" id="5Nf-tB-ETU"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="dcb-rv-QZm" secondAttribute="bottom" constant="8" id="BW2-Eg-BVu"/>
+                                    <constraint firstItem="dcb-rv-QZm" firstAttribute="leading" secondItem="wgj-ce-L4b" secondAttribute="leadingMargin" id="e6h-jz-OlM"/>
+                                    <constraint firstAttribute="trailing" secondItem="85K-dq-V9Q" secondAttribute="trailing" id="jIY-Gf-Fxz"/>
+                                    <constraint firstItem="85K-dq-V9Q" firstAttribute="leading" secondItem="wgj-ce-L4b" secondAttribute="leading" id="lZL-OY-thj"/>
+                                    <constraint firstItem="dcb-rv-QZm" firstAttribute="top" secondItem="85K-dq-V9Q" secondAttribute="bottom" constant="8" id="tbj-Sa-Jng"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="yZg-kX-fft"/>
-                                </connections>
-                            </textView>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zLk-hF-gUo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="NED-vS-VaQ"/>
-                            <constraint firstItem="zLk-hF-gUo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="spb-Bp-8Hf"/>
-                            <constraint firstAttribute="trailing" secondItem="zLk-hF-gUo" secondAttribute="trailing" id="thE-9n-mKu"/>
+                            <constraint firstItem="wgj-ce-L4b" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="DSK-pK-ywK"/>
+                            <constraint firstItem="wgj-ce-L4b" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="nBL-vm-NbQ"/>
+                            <constraint firstAttribute="trailing" secondItem="wgj-ce-L4b" secondAttribute="trailing" id="nb8-9Q-4PY"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wgj-ce-L4b" secondAttribute="bottom" id="wyQ-Jp-D9K"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="textView" destination="zLk-hF-gUo" id="phb-ra-pvT"/>
-                        <outlet property="textViewHeightConstraint" destination="P9A-yh-yQh" id="zcr-HM-Lek"/>
+                        <outlet property="imageViewWidthConstraint" destination="RZa-e2-N5M" id="BXq-eC-aBp"/>
+                        <outlet property="scrollViewBottomConstraint" destination="wyQ-Jp-D9K" id="c3O-Mz-rof"/>
+                        <outlet property="textView" destination="85K-dq-V9Q" id="3LA-yD-zU6"/>
+                        <outlet property="textViewHeightConstraint" destination="SkY-y1-weP" id="778-Ai-8PL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -10,19 +10,25 @@ import UIKit
 
 class ViewController: UIViewController, UITextViewDelegate {
     
-    let verticalInset = 16.0
+    let verticalInset = 20.0
     let horizontalInset = 10.0
     let backgroundColor = UIColor(white: 0.97, alpha: 1.0)
     let animationDuration = 0.2
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.textAlignment = .Left
         textView.showsVerticalScrollIndicator = false
         textView.backgroundColor = backgroundColor
+        
+        imageViewWidthConstraint.constant = self.view.frame.size.width - 16
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillChangeFrame:", name: UIKeyboardWillChangeFrameNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +46,22 @@ class ViewController: UIViewController, UITextViewDelegate {
             self?.view.layoutIfNeeded()
         })
         return true
+    }
+    
+    func keyboardWillChangeFrame(notification: NSNotification) {
+        guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() else {
+            return;
+        }
+        guard let animationDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue else {
+            return;
+        }
+        
+        print("\(animationDuration) and \(keyboardRect)")
+        
+        scrollViewBottomConstraint.constant = view.frame.size.height - keyboardRect.origin.y
+        UIView.animateWithDuration(animationDuration, animations: { [weak self] in
+            self?.view.layoutIfNeeded()
+        })
     }
 
 }
