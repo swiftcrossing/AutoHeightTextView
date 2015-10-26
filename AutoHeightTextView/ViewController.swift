@@ -41,10 +41,9 @@ class ViewController: UIViewController, UITextViewDelegate {
         let newString: NSString = oldString.stringByReplacingCharactersInRange(range, withString: text)
         let size = CGSizeMake(textView.frame.size.width - CGFloat(horizontalInset), CGFloat(MAXFLOAT))
         let rect = newString.boundingRectWithSize(size, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName: textView.font!], context: nil)
+        
         textViewHeightConstraint.constant = rect.height + CGFloat(verticalInset)
-        UIView.animateWithDuration(animationDuration, animations: { [weak self] in
-            self?.view.layoutIfNeeded()
-        })
+        self.view.animateLayout(animationDuration)
         return true
     }
     
@@ -59,10 +58,16 @@ class ViewController: UIViewController, UITextViewDelegate {
         print("\(animationDuration) and \(keyboardRect)")
         
         scrollViewBottomConstraint.constant = view.frame.size.height - keyboardRect.origin.y
-        UIView.animateWithDuration(animationDuration, animations: { [weak self] in
-            self?.view.layoutIfNeeded()
-        })
+        self.view.animateLayout(animationDuration)
     }
 
+}
+
+extension UIView {
+    func animateLayout(duration: NSTimeInterval) {
+        UIView.animateWithDuration(duration, animations: { [weak self] in
+            self?.layoutIfNeeded()
+        })
+    }
 }
 
